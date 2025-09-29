@@ -7,7 +7,7 @@
 #include <fstream>
 using namespace std;
 
-const int W15 = 15, SIZE = 4;
+const int W15 = 15, W10 = 10, SIZE = 4;
 
 class Movie {
 private:
@@ -18,7 +18,7 @@ private:
 public:
     // getters and setters
     string getTitle()                   { return title; }
-    void setTitle(string t)             { title= t; }
+    void setTitle(string t)             { title = t; }
     int getYearReleased()               { return yearReleased; }
     void setYearReleased(int y)         { yearReleased = y; }
     string getScreenWriter()            { return screenWriter; }
@@ -26,7 +26,7 @@ public:
 
     // other methods
     void print() {
-        cout << setw(W15) << "Movie: " << screenWriter << endl;
+        cout << setw(W10) << "Movie: " << screenWriter << endl;
         cout << setw(W15) << "Year Released: " << yearReleased << endl;
         cout << setw(W15) << "Screenwriter: " << title << endl;
     }
@@ -44,10 +44,10 @@ int main() {
     int i = 0; // temporary index
 
     if (fin.good()) {
-        while (fin >> t) {
+        while (getline(fin, t)) {
+            fin >> y;  
             fin.ignore();
             getline(fin, s);
-            fin >> y; 
             Movie tmp;
             tmp.setTitle(t);
             tmp.setYearReleased(y);
@@ -58,20 +58,22 @@ int main() {
         }
         fin.close();
     }
-    else
+    else 
         cout << "Input file not found.\n";
 
     // output vector
+    cout << "Output with Vector:" << endl;
     for (auto val : movies_v) {
-        cout << val.getGPA() << " " << val.getName() 
-        << " " << val.getCourseLoad() << endl;
+        val.print();
+        cout << endl;
     }
     cout << endl;
 
     // output array
-    for (auto val : students_a) {
-        cout << val.getGPA() << " " << val.getName() 
-        << " " << val.getCourseLoad() << endl;
+    cout << "Output with Array:" << endl;
+    for (auto val : movies_a) {
+        val.print();
+        cout << endl;
     }
     
     return 0;
