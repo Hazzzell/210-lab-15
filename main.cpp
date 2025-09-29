@@ -22,38 +22,38 @@ public:
     int getYearReleased()               { return yearReleased; }
     void setYearReleased(int y)         { yearReleased = y; }
     string getScreenWriter()            { return screenWriter; }
-    void setScreenWriter(string n)      { screenWriter = s; }
+    void setScreenWriter(string s)      { screenWriter = s; }
 
     // other methods
     void print() {
-        cout << setw(W15) << "GPA: " << GPA << endl;
-        cout << setw(W15) << "Name: " << name << endl;
-        cout << setw(W15) << "Course load: " << courseLoad << endl;
+        cout << setw(W15) << "Movie: " << screenWriter << endl;
+        cout << setw(W15) << "Year Released: " << yearReleased << endl;
+        cout << setw(W15) << "Screenwriter: " << title << endl;
     }
 };
 
 int main() {
     // declarations
     cout << fixed << setprecision(2);
-    vector<Student> students_v;
-    array<Student, SIZE> students_a;
+    vector<Movie> movies_v;
+    array<Movie, SIZE> movies_a;
     ifstream fin ("input.txt");
-    double g;  // holds temporary GPA
-    int l;     // holds temporary load
-    string n;  // holds temporary name
+    string t;  // holds temporary title
+    int y;     // holds temporary year
+    string s;  // holds temporary screenwriter
     int i = 0; // temporary index
 
     if (fin.good()) {
-        while (fin >> g) {
+        while (fin >> t) {
             fin.ignore();
-            getline(fin, n);
-            fin >> l; 
-            Student tmp;
-            tmp.setGPA(g);
-            tmp.setName(n);
-            tmp.setCourseLoad(l);
-            students_v.push_back(tmp);
-            students_a[i] = tmp;
+            getline(fin, s);
+            fin >> y; 
+            Movie tmp;
+            tmp.setTitle(t);
+            tmp.setYearReleased(y);
+            tmp.setScreenWriter(s);
+            movies_v.push_back(tmp);
+            movies_a[i] = tmp;
             i++;
         }
         fin.close();
@@ -62,7 +62,7 @@ int main() {
         cout << "Input file not found.\n";
 
     // output vector
-    for (auto val : students_v) {
+    for (auto val : movies_v) {
         cout << val.getGPA() << " " << val.getName() 
         << " " << val.getCourseLoad() << endl;
     }
